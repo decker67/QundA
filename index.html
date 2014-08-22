@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html ng-app="qa">
+
+<head lang="de">
+    <meta charset="UTF-8">
+    <title>Q & A</title>
+</head>
+
+<body ng-controller="QaController">
+
+    <div ng-show="state == undefined">
+        Daten werden geladen ...
+    </div>
+
+    <div ng-show="state == 'init'">
+        <button ng-click="start()">Start</button>
+    </div>
+
+    <div ng-show="state == 'started'">
+        <div id="question">{{ actualQuestion.question }}</div>
+        <button ng-click="showAnswer()">Prüfen</button>
+
+        <div ng-hide="answerVisible">?</div>
+        <div ng-show="answerVisible">{{ actualQuestion.answer }}</div>
+
+        <button ng-click="answerIsCorrect()">Richtig</button>
+        <button ng-click="answerIsWrong()">Falsch</button>
+        <button ng-click="stop()">Abbrechen</button>
+    </div>
+
+    <div ng-show="state == 'ended'">
+        <p>Du hast von den insgesamt {{ totalNumberOfQuestions }} Fragen
+        {{ correctAnsweredQuestions }} richtig und
+        {{ wrongAnsweredQuestions }} falsch beantwortet.</p>
+       <button ng-click="init()">Startseite</button>
+    </div>
+
+    <script type="text/javascript" src="lib/angular.js"></script>
+    <script type="text/javascript" src="index.js"></script>
+</body>
+</html>
